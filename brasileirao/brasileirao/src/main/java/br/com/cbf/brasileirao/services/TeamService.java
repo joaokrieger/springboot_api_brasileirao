@@ -1,6 +1,7 @@
 package br.com.cbf.brasileirao.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class TeamService {
         return teamRepository.save(team);
     }
 
-    public Team loadTeam(Long teamId){
-        return teamRepository.findById(teamId).get();
+    public Optional<Team> loadTeam(Long teamId){
+        return teamRepository.findById(teamId);
     }
 
     public List<Team> listTeams(){

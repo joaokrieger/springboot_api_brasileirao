@@ -2,8 +2,10 @@ package br.com.cbf.brasileirao.rest;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,21 +27,25 @@ public class MatchRestController {
     @PostMapping(value = "/generate-matches")
     public ResponseEntity<Void> generateMatchSchedule(){
         matchService.generateLeagueMatches(LocalDateTime.now());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping
     public ResponseEntity<List<Match>> getMatches(){
-        return ResponseEntity.ok().body(matchService.listMatches());
+        return ResponseEntity.status(HttpStatus.OK).body(matchService.listMatches());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Match> getMatch(@PathVariable(value = "id") Long matchId){
-        return ResponseEntity.ok().body(matchService.loadMatch(matchId));
+    public ResponseEntity<Object> getMatch(@PathVariable(value = "id") Long matchId){
+        Optional<Match> match = matchService.loadMatch(matchId);
+        if(match.isEmpty())
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Match not found.");
+
+        return ResponseEntity.status(HttpStatus.OK).body(match);
     }
 
     @GetMapping(value = "/classification")
     public ResponseEntity<List<ClassificationDto>> getClassification(){
-        return ResponseEntity.ok().body(matchService.getClassification());
+        return ResponseEntity.status(HttpStatus.OK).body(matchService.getClassification());
     }
 }

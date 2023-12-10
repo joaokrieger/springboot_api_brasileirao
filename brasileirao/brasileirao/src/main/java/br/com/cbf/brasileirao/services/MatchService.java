@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -91,8 +92,8 @@ public class MatchService {
         return matchRepository.findAll();
     }
 
-    public Match loadMatch(Long matchId){
-        return matchRepository.findById(matchId).get();
+    public Optional<Match> loadMatch(Long matchId){
+        return matchRepository.findById(matchId);
     }
 
     public List<ClassificationDto> getClassification() {

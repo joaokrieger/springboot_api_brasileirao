@@ -1,5 +1,7 @@
 package br.com.cbf.brasileirao.models;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,4 +29,6 @@ public class Match {
     private int homeTeamGoals;
     private int awayTeamGoals;
     private int audience;
+    private int round;
+    private LocalDateTime date;
 }

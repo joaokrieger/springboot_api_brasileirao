@@ -22,8 +22,8 @@ public class TeamRestController {
     @Autowired
     private TeamService teamService;
 
-    @GetMapping(value = "{id}")
-    public ResponseEntity<Team> getTeam(@PathVariable Long teamId){
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Team> getTeam(@PathVariable(value = "id") Long teamId){
         return ResponseEntity.ok().body(teamService.loadTeam(teamId));
     }
 

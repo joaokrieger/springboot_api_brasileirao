@@ -29,6 +29,6 @@ public class Match {
     private int homeTeamGoals;
     private int awayTeamGoals;
     private int audience;
-    private int round;
+    private int matchweek;
     private LocalDateTime date;
 }

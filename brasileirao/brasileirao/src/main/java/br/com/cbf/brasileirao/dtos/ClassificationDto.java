@@ -3,7 +3,7 @@ package br.com.cbf.brasileirao.dtos;
 import lombok.Data;
 
 @Data
-public class ClassificationDto {
+public class ClassificationDto implements Comparable<ClassificationDto>{
     private String team;
     private Long teamId;
     private Integer position;
@@ -14,4 +14,9 @@ public class ClassificationDto {
     private Integer defeats;
     private Integer goalsScored;
     private Integer goalsConceded;
+
+    @Override
+    public int compareTo(ClassificationDto classificationDto) {
+        return this.getPoints().compareTo(classificationDto.getPoints());
+    }
 }

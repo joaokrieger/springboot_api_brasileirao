@@ -2,6 +2,7 @@ package br.com.cbf.brasileirao.services;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -154,6 +155,13 @@ public class MatchService {
             classificationDto.setPoints((victories.get() * 3) + draws.get());
             classificationDtos.add(classificationDto);
         });
+
+        Collections.sort(classificationDtos, Collections.reverseOrder());
+
+        int position = 1;
+        for(ClassificationDto classificationDto : classificationDtos){
+            classificationDto.setPosition(position++);
+        }
 
         return classificationDtos;
     }
